@@ -33,9 +33,9 @@ class Profile extends Model {
   static async getBestClients(since, to, limit) {
     return Profile.findAll({
       subQuery: false, // It is needed to use the limit param with agregations of associations columns
-      attributes: ["profession", [sequelize.fn("SUM", col("Client.Jobs.price")), "total"]],
-      group: ["profession"],
-      order: [["total", "DESC"]],
+      attributes: ["id", [sequelize.fn("SUM", col("Client.Jobs.price")), "paid"], [sequelize.literal("firstName || ' ' || lastName"), "fullName"]],
+      group: ["Profile.id"],
+      order: [["paid", "DESC"]],
       where: { type: ProfileType.CLIENT },
       include: [{
         model: Contract,

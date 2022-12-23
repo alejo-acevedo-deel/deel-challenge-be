@@ -1,11 +1,11 @@
 FROM node:16
 
 COPY package.json package-lock.json ./
-COPY src ./src
-COPY scripts ./scripts
 
 RUN npm ci
-RUN npm run seed
+
+COPY src ./src
+COPY scripts ./scripts
 
 EXPOSE 3001
 

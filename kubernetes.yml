@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $APP_NAME
+spec:
+  selector:
+    matchLabels:
+      app: $APP_NAME
+  template:
+    metadata:
+      labels:
+        app: $APP_NAME
+    spec:
+      containers:
+        - image: $DOCKER_USERNAME/$APP_NAME
+          name: $APP_NAME
+          env:
+            - name: NODE_ENV
+              value: production
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $APP_NAME
+spec:
+  type: ClusterIP
+  ports:
+    - name: $APP_NAME
+      port: 3001
+  selector:
+    app: $APP_NAME
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: $APP_NAME
+  annotations:
+    dev.okteto.com/generate-host: $APP_NAME
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: $APP_NAME
+                port:
+                  number: 3001
+            path: /
+            pathType: ImplementationSpecific

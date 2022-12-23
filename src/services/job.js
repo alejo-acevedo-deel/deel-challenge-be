@@ -13,8 +13,6 @@ const getUnpaidJobsByProfile = async (profileId) => {
 
   const jobs = await Promise.all([clientJob, contractorJob]);
 
-  console.log(jobs);
-
   return { status: 200, response: { result: jobs.flat() } };
 };
 
@@ -37,7 +35,7 @@ const makePayment = async (jobId, profile) => {
     return { status: 201, response: { result: job } };
   } catch (error) {
     t.rollback();
-    return { status: erros.status || 500, response: { error: error.message || 'Internal server error' } };
+    return { status: error.status || 500, response: { error: error.message || 'Internal server error' } };
   }
 };
 

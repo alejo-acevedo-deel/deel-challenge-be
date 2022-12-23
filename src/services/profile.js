@@ -13,7 +13,7 @@ const queryBestProfession = async (since, to) => {
       };
     }
 
-    return { status: 200, response: queryResult };
+    return { status: 200, response: queryResult[0] };
   } catch (error) {
     return { status: 500, response: { message: error.message || "Internal server error" } };
   }
@@ -39,12 +39,8 @@ const queryBestClients = async (since, to, limit = 2) => {
 }
 
 const executeTransfer = async (fromId, toId, amount, transactionOption) => {
-  console.log(fromId, toId)
-
   const from = await Profile.getById(fromId, transactionOption);
   const to = await Profile.getById(toId, transactionOption);
-
-  console.log(from, to)
 
   if (!from || !to) {
     throw new Error('Profile not found');

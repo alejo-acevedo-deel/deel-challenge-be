@@ -13,7 +13,6 @@ const makeDeposit = async (profile, toId, amount) => {
 
     if (profile.type === ProfileType.CLIENT) {
       const debt = await Job.getClientDebt(profile.id, transactionOption);
-      console.log(debt);
       if (debt * DEBT_RATIO < amount) throw new AmountBiggerThanRatioError('Amount is bigger than debt ratio');
     }
     if (profile.id === toId) throw new SelfDepositError('Cannot deposit to yourself');

@@ -18,7 +18,6 @@ class Job extends Model {
       unpaidWithFilter.where = { paid: { [Op.or]: [null, false] } };
     }
 
-    console.log(unpaidWithFilter);
     return Job.findAll(unpaidWithFilter);
   }
 

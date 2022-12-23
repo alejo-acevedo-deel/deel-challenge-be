@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "cdda6e9d-adbc-4b40-bcec-4e422ca65049",
+		"name": "DeelChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7827667"
+	},
+	"item": [
+		{
+			"name": "Get Active Contracts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/contracts",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"contracts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Best Profession",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');",
+							"",
+							"pm.collectionVariables.set(\"end\", Date.now());",
+							"",
+							"const start = new Date(\"2020-01-15T19:11:26.737Z\").getTime();",
+							"",
+							"pm.collectionVariables.set(\"start\", start);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/admin/best-profession?start={{start}}&end={{end}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"best-profession"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "{{start}}"
+						},
+						{
+							"key": "end",
+							"value": "{{end}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Best Client",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');",
+							"",
+							"pm.collectionVariables.set(\"end\", Date.now());",
+							"",
+							"const start = new Date(\"2020-01-15T19:11:26.737Z\").getTime();",
+							"",
+							"pm.collectionVariables.set(\"start\", start);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/admin/best-client?start={{start}}&end={{end}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin",
+						"best-client"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "{{start}}"
+						},
+						{
+							"key": "end",
+							"value": "{{end}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Unpaid Jobs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/jobs/unpaid",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"unpaid"
+					],
+					"query": [
+						{
+							"key": "profile_id",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay A Job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/jobs/1/pay",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"1",
+						"pay"
+					],
+					"query": [
+						{
+							"key": "profile_id",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make Deposit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "profile_id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/balances/deposit/1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"balances",
+						"deposit",
+						"1"
+					],
+					"query": [
+						{
+							"key": "profile_id",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "now",
+			"value": "now"
+		},
+		{
+			"key": "since",
+			"value": "since"
+		},
+		{
+			"key": "end",
+			"value": ""
+		},
+		{
+			"key": "start",
+			"value": ""
+		},
+		{
+			"key": "URL",
+			"value": "https://deel-challenge-be-aleacevedo.cloud.okteto.net"
+		}
+	]
+}
